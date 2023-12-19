@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:media_projection_creator/media_projection_creator.dart';
@@ -30,9 +32,12 @@ class MethodChannelCaptureScreenshot extends CaptureScreenshotPlatform {
 
   @override
   Future<Uint8List?> captureScreenshot({int? delayInMilliseconds}) async {
-    await requestPermission();
-    if (!_isGranted) {
-      return null;
+    // Only need to request permission on Android
+    if (Platform.isAndroid) {
+      await requestPermission();
+      if (!_isGranted) {
+        return null;
+      }
     }
     final Uint8List screenshot = await methodChannel.invokeMethod('captureScreenshot', {"delayInMilliseconds": delayInMilliseconds});
     return screenshot;

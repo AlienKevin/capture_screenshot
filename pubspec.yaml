@@ -1,7 +1,7 @@
 name: capture_screenshot
 description: "A new Flutter plugin project."
 version: 0.0.1
-homepage:
+homepage: "https://github.com/AlienKevin/capture_screenshot"
 
 environment:
   sdk: '>=3.2.3 <4.0.0'
@@ -37,8 +37,6 @@ flutter:
     platforms:
       android:
         package: li.kevinx.capture_screenshot
-        pluginClass: CaptureScreenshotPlugin
-      ios:
         pluginClass: CaptureScreenshotPlugin
 
   # To add assets to your plugin package, add an assets section, like this:
