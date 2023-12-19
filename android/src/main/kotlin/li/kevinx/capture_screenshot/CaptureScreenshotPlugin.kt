@@ -128,6 +128,8 @@ class CaptureScreenshotPlugin : FlutterPlugin, MethodCallHandler, EventChannel.S
       null,
     )
 
+    val delayInMilliseconds = call.argument<Int>("delayInMilliseconds") ?: 100;
+
     Handler(Looper.getMainLooper()).postDelayed({
       val image = imageReader.acquireLatestImage() ?: return@postDelayed
 
@@ -154,6 +156,6 @@ class CaptureScreenshotPlugin : FlutterPlugin, MethodCallHandler, EventChannel.S
       result.success(
         byteArray
       )
-    }, 600)
+    }, delayInMilliseconds.toLong())
   }
 }

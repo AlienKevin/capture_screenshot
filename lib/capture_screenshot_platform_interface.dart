@@ -25,5 +25,5 @@ abstract class CaptureScreenshotPlatform extends PlatformInterface {
     _instance = instance;
   }
 
-  Future<Uint8List?> captureScreenshot();
+  Future<Uint8List?> captureScreenshot({int? delayInMilliseconds});
 }

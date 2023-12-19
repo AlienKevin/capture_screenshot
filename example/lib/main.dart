@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'dart:async';
 
@@ -33,14 +31,16 @@ class _MyAppState extends State<MyApp> {
     // Platform messages may fail, so we use a try/catch PlatformException.
     // We also handle the message potentially returning null.
     try {
-      final imageBytes = await _captureScreenshotPlugin.captureScreenshot();
+      // Adjust the delayInMilliseconds to suit your needs
+      final imageBytes = await _captureScreenshotPlugin.captureScreenshot(
+          delayInMilliseconds: 200);
       if (imageBytes != null) {
         screenshot = Image.memory(imageBytes);
         print("Successfully taken a screenshot!");
       } else {
         print("Failed to take a screenshot!");
       }
-    } on PlatformException catch(e) {
+    } on PlatformException catch (e) {
       print("Failed to take a screenshot!");
       print(e);
       screenshot = null;
@@ -61,22 +61,21 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Plugin example app'),
+          title: const Text('capture_screenshot example app'),
         ),
         body: Center(
-          child: Column(
-            children: [
-              TextButton(
-                child: Text('Capture Screenshot'),
-                onPressed: () {
-                  print("Capturing screenshot...");
-                  captureScreenshot();
-                },
-              ),
-              _screenshot != null ? Expanded(child: _screenshot!) : Container(),
-            ],
-          )
-        ),
+            child: Column(
+          children: [
+            TextButton(
+              child: const Text('Capture Screenshot'),
+              onPressed: () {
+                print("Capturing screenshot...");
+                captureScreenshot();
+              },
+            ),
+            _screenshot != null ? Expanded(child: _screenshot!) : Container(),
+          ],
+        )),
       ),
     );
   }
